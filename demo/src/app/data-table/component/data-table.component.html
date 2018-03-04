@@ -1,0 +1,42 @@
+<div>
+  <div *ngIf="showLoader && loading" class="loading"></div>
+
+  <mat-form-field floatPlaceholder="never" *ngIf="filterDisplay">
+    <input matInput #filter placeholder="{{placeHolderFilter}}" matTooltip="{{toolTipFilter}}">
+  </mat-form-field>
+
+  <!--<mat-spinner fxFlexAlign="center" style="margin:0 auto;" *ngIf="loading" [mode]="'indeterminate'"></mat-spinner>-->
+  <mat-table #table [dataSource]="dataSource.datasource" matSort matSortDisableClear class="mat-table-selectable mat-elevation-z8">
+    <!-- colonnes champs -->
+    <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.sortField ? column.sortField : column.columnDef">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header [fxFlex]="flexWidth('column', column)" [disabled]="!column.sort" [hidden]="column.hidden">{{ column.header }}</mat-header-cell>
+      <mat-cell matTooltip="{{getTooltip(column, row)}}"
+                *cdkCellDef="let row" [style.color]="getColor(column, row)"
+                [fxFlex]="flexWidth('column', column)" [hidden]="column.hidden">
+        <span [innerHTML]="column.display(row)"></span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- actions -->
+    <ng-container *ngFor="let action of actions" [cdkColumnDef]="action.label">
+      <mat-header-cell *cdkHeaderCellDef [fxFlex]="flexWidth('action', action, row)"></mat-header-cell>
+      <mat-cell *cdkCellDef="let row" [fxFlex]="flexWidth('action', action)">
+        <button *ngIf="action.hidden ? ! action.hidden(row) : true" mat-icon-button matTooltip="{{action.tooltip}}" (click)="action.click(row)">
+          <mat-icon>{{action.icon}}</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- colonnes à afficher -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [length]="total"
+                 [pageIndex]="0"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizesList"></mat-paginator>
+
+</div>
