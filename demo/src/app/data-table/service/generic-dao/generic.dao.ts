@@ -138,8 +138,8 @@ export abstract class DaoGeneric<T> {
 
   /**
    * Création de l'object Pagination
-   * @param response : retour JSON Django de type TemplateObject { count: n, results: [{}] }
-   * @param limit : limite de la liste d'objets ramenés, si limit null | 0 : la pagination Django n'est pas activée
+   * @param response : retour JSON  de type TemplateObject { count: n, results: [{}] }
+   * @param limit : limite de la liste d'objets ramenés, si limit null | 0 : la pagination n'est pas activée
    * @return {Pagination}
    * @private
    */
