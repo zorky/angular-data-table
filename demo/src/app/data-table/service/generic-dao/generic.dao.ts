@@ -143,7 +143,7 @@ export abstract class DaoGeneric<T> {
    * @return {Pagination}
    * @private
    */
-  private _getPagination(response, limit) {
+  protected _getPagination(response, limit) {
     const pagination: Pagination = new Pagination();
 
     if('results' in response && limit > 0) {
@@ -161,7 +161,7 @@ export abstract class DaoGeneric<T> {
     return pagination;
   }
 
-  private _getParams(limit: number, offset: number, keyword: string, extraQS: Map<string,any> = null) {
+  protected _getParams(limit: number, offset: number, keyword: string, extraQS: Map<string,any> = null) {
     let params: HttpParams = this._getUrlHttpParams(extraQS);
     if (limit > 0) {
       params = params.set('limit', limit.toString()).set('offset', offset.toString());
@@ -174,7 +174,7 @@ export abstract class DaoGeneric<T> {
     return params;
   }
 
-  private _getSorting(sort: string, order: string, params: HttpParams) {
+  protected _getSorting(sort: string, order: string, params: HttpParams) {
     let orderDirection = '';
     let orderField = '';
     if(order) {
