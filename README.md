@@ -4,7 +4,7 @@ Angular generic data table with list, sort, pagination, search on backend API (w
 
 DaoGeneric<User> contient principalement la fonction list() qui construit la requête qui sera envoyée au backend API
    
-__Format de l'URL construite pour la liste :__
+__Format de l'URL construite pour la liste :__ (il est possible de modifier ces différents paramètres en surchargeant _getPagination(), _getSorting() et _getParams()
 
 * pour la pagination : **&limit=n&offset=m**
 * pour le sort : **&ordering=[-]champ** le - fait un tri desc
