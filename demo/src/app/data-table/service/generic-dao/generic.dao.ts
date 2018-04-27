@@ -196,7 +196,7 @@ export abstract class DaoGeneric<T> {
     return params;
   }
 
-  private _getUrlHttpParams(extraQS: Map<string, string>): HttpParams {
+  protected _getUrlHttpParams(extraQS: Map<string, string>): HttpParams {
     let urlQS = new HttpParams();
 
     if(extraQS !== null) {
