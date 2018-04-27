@@ -24,6 +24,14 @@ Pagination {
 }
 ```
 
+Lors de l'implémentation de DaoGeneric<T> (**generic.dao.ts**), il est possible de surcharger 3 méthodes supplémentaires pour modifier les paramètres querystring envoyés 
+
+```typescript
+_getSorting(): HttpParams : la construction pour le tri
+_getPagination(): Pagination : la construction pour la pagination
+_getParams(): HttpParams : la construction pour la recherche et la pagination
+```   
+
 Exemple d'utilisation :
 
 **user.model.ts**
